@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public class JobRepo {
 
-    // arrayList to store store JobPost objects
+    // arrayList to store JobPost objects
     List<JobPost> jobs = new ArrayList<>();
 
     // constructor->injecting objects into ArrayList defined above.
