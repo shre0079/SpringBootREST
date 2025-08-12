@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class JobService {
     @Autowired
-    public JobRepo repo;
+    public JobRepo repository;
     //method to return all JobPosts
     public List<JobPost> returnAllJobPosts() {
         return repo.returnAllJobPosts();
