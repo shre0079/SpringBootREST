@@ -12,8 +12,8 @@ public class JobService {
     @Autowired
     public JobRepo repository;
     //method to return all JobPosts
-    public List<JobPost> returnAllJobPosts() {
-        return repo.returnAllJobPosts();
+    public List<JobPost> getAllJobs() {
+        return repository.getAllJobs();
     }
     // method to add a jobPost
     public void addJobPost(JobPost jobPost) {
