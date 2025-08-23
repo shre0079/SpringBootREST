@@ -31,6 +31,31 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Composite UserDetailsService:
+     * - Try DB first
+     * - If not found, try in-memory
+     */
+    @Bean
+    public UserDetailsService userDetailsService() {
+        UserDetails staticUser = User.withUsername("user")
+                .password(passwordEncoder().encode("password"))
+                .roles("USER")
+                .build();
+
+        InMemoryUserDetailsManager inMemoryManager = new InMemoryUserDetailsManager(staticUser);
+
+        return username -> {
+            try {
+                // Try DB first
+                return myUserDetailsService.loadUserByUsername(username);
+            } catch (Exception e) {
+                // Fall back to in-memory
+                return inMemoryManager.loadUserByUsername(username);
+            }
+        };
+    }
+
     @Bean
     public DaoAuthenticationProvider authenticationProvider(UserDetailsService userDetailsService) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
