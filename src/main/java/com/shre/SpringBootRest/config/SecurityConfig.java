@@ -39,7 +39,9 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
-        return daoAuthenticationProvider;
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
     }
 
 //    @Bean
